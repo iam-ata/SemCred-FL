@@ -1,0 +1,59 @@
+# Python environments and caches
+.venv/
+.conda/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.pytest_tmp*/
+.mypy_cache/
+.mypy_cache*/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Local staging, temporary, and generated output
+.staging/
+tmp/
+artifacts/
+logs/
+results/
+
+# Research inputs that must not be redistributed
+Datasets/
+Baselines PDF/
+paper/
+data/raw/
+data/processed/
+*.pdf
+*.rar
+
+# Generated data, databases, checkpoints, and archives
+*.parquet
+*.sqlite3
+*.sqlite3-shm
+*.sqlite3-wal
+*.pt
+*.pth
+*.npy
+*.npz
+*.joblib
+*.zip
+
+# Credentials and machine-local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+secrets.json
+
+# Editor and operating-system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini

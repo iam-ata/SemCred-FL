@@ -1,0 +1,15 @@
+# Colab supplies a CUDA-enabled PyTorch build. The notebook validates it and does not
+# replace it with the Windows-specific cu130 wheel pinned in environment.yml.
+numpy>=1.26,<3
+pandas>=2.2,<4
+pyarrow>=17,<24
+scikit-learn>=1.5,<2
+PyYAML>=6,<7
+matplotlib>=3.9,<4
+seaborn>=0.13,<1
+psutil>=6,<8
+black>=24,<27
+mypy>=1.10,<2
+pytest>=8,<10
+pytest-cov>=5,<8
+ruff>=0.6,<1

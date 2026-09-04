@@ -1,0 +1,100 @@
+schema_version: 1
+phase: 6A
+status: contract_frozen_resolution_artifacts_pending
+base_seed: 20260816
+
+profiles:
+  - dataset: edge_iiotset
+    split_id: b6616d2030f682906d205b0a105234a78a86ec995588fd4bbfe100ba2b6ca886
+    preprocessor_id: c175c802c8c30049f0ddfcba72b44c1c020e52e7472b691b5488dc9d842bc7ff
+    source_family: injection
+    source_family_id: 3
+    target_family: benign
+    target_family_id: 0
+    source_selection_rule: least_frequent_non_benign_primary_family_with_at_least_10000_federated_training_records
+    minimum_training_records: 10000
+    observed_federated_training_records: 46519
+  - dataset: cic_iot_2023
+    split_id: 590fb686703ef03c30314499629f13d8b083f24f45348f3cd289198abcac99ca
+    preprocessor_id: e39b411b302da0c97ef766c0d8c9e36caa4c718e65f702f40e78705fde497e8a
+    source_family: web_based
+    source_family_id: 7
+    target_family: benign
+    target_family_id: 0
+    source_selection_rule: least_frequent_non_benign_primary_family_with_at_least_10000_federated_training_records
+    minimum_training_records: 10000
+    observed_federated_training_records: 17060
+
+data_poisoning:
+  poison_fractions: [0.1, 0.3, 0.5]
+  no_op_fraction: 0.0
+  selection_scope: eligible_source_rows_on_each_malicious_client
+  selection_rule: lowest_sha256_rank_without_replacement
+  selection_key_fields: [run_seed, attack_id, client_id, record_id]
+  selected_count_rule: "floor(poison_fraction*eligible_rows)"
+  allowed_partition: federated_train_after_anchor_removal
+
+feature_poisoning:
+  coordinate_system: phase3c_continuous_standardized
+  feature_count: 3
+  candidate_rule: nonconstant_continuous_coordinates_with_positive_clip_range
+  ranking_rule: descending_absolute_source_vs_benign_standardized_median_gap
+  transformation: "x_prime=x+strength*(benign_median-x)"
+  strengths: [0.5, 1.0]
+  projection: clip_to_phase3c_training_0.001_0.999_bounds
+  preserve_labels: true
+  resolution_partition: federated_train_after_anchor_removal
+
+backdoor:
+  coordinate_system: phase3c_continuous_standardized
+  minimum_coordinates: 3
+  maximum_coordinates: 6
+  candidate_pool_size: 12
+  value_rule: rarest_phase3c_clip_endpoint_tuple_on_federated_train
+  tie_break_rule: coordinate_name_then_lower_before_upper
+  training_collision_requirement: 0
+  poisoned_label_rule: source_family_to_benign
+  triggered_test_source: clean_test_source_family_rows
+  natural_test_collision_policy: report_and_exclude_from_asr_denominator
+
+coordination:
+  mode: shared_objective_and_parameters
+  synchronized_active_rounds: true
+  shared_fields:
+    - attack_family
+    - source_family
+    - target_family
+    - poison_fraction
+    - resolved_feature_or_trigger_artifact_id
+  client_specific_record_selection: true
+  may_share_malicious_updates: true
+  may_observe_current_benign_updates: false
+  may_access_anchor_records: false
+
+direct_model:
+  scaling_factors: [5.0, 10.0]
+  scaling_formula: "delta_prime=scale*delta"
+  reversal_factors: [1.0, 5.0, 10.0]
+  reversal_formula: "delta_prime=-scale*delta"
+  replacement_formula: "delta_prime=(participants_per_round/coalition_size)*(theta_star-theta_t)"
+  replacement_target_model: local_model_trained_on_frozen_backdoor_objective
+  declared_sample_count_manipulation: false
+
+adaptive_norm:
+  base_objective: targeted_label_flip_source_family_to_benign
+  reference_population: benign_only_development_runs_same_dataset_model_and_partition
+  reference_quantiles: [0.25, 0.75]
+  projection: radially_clip_l2_norm_to_frozen_reference_interval
+  reference_artifact_required: true
+  current_round_benign_updates_visible: false
+  anchor_records_visible: false
+
+matrix:
+  malicious_client_ratios: [0.1, 0.2, 0.3, 0.4]
+  heterogeneity_profiles: [iid, dirichlet_0_1, dirichlet_0_3, dirichlet_1_0]
+  pilot_seed_count: 5
+  confirmatory_minimum_seed_count: 10
+  seed_derivation: "derive_seed(root_seed,'attack/<attack_id>/<replicate_index>')"
+
+test_partition_accessed: false
+performance_claims_allowed: false

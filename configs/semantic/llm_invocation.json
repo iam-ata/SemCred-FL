@@ -1,0 +1,11 @@
+{
+  "accessed_at_utc": "2026-08-31T18:59:30+00:00",
+  "max_output_tokens": 32000,
+  "model": "gpt-5.4-mini-2026-03-17",
+  "provider": "openai",
+  "schema_version": "1.0",
+  "seed": null,
+  "seed_behavior": "The OpenAI Responses API request has no seed parameter. Reuse the immutable saved response for exact reproduction.",
+  "temperature": 0.0,
+  "top_p": 1.0
+}

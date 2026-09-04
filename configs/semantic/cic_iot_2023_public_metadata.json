@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "dataset": "cic_iot_2023",
+  "review_status": "approved",
+  "reviewed_at_utc": "2026-08-31T19:27:06.4641854Z",
+  "reviewer": "Ata Mohammadi",
+  "sources": [
+    {
+      "source_id": "cic_paper",
+      "citation": "Neto, E. C. P., Dadkhah, S., Ferreira, R., Zohourian, A., Lu, R., and Ghorbani, A. A. (2023). CICIoT2023: A Real-Time Dataset and Benchmark for Large-Scale Attacks in IoT Environment. Sensors, 23(13), 5941.",
+      "url": "https://doi.org/10.3390/s23135941"
+    },
+    {
+      "source_id": "cic_dataset_page",
+      "citation": "Canadian Institute for Cybersecurity. CIC IoT Dataset 2023: data descriptions and official supplementary downloads.",
+      "url": "https://www.unb.ca/cic/datasets/iotdataset-2023.html"
+    },
+    {
+      "source_id": "cic_extractor",
+      "citation": "CICIoT2023 supplementary pcap2csv feature-extraction source distributed from the official dataset page (local archive SHA-256 1AB24F2A4373ACBDAC08E6835F07BC87DA472390D5658524B63DE5E3E084B4AC).",
+      "url": "https://www.unb.ca/cic/datasets/iotdataset-2023.html"
+    }
+  ],
+  "feature_groups": [
+    {"name":"Header_Length","definition":"Mean transport-layer header length across the extractor's packet aggregation window; UDP uses its fixed header length and TCP includes options.","unit":"bytes","admissible_range":"Nonnegative real value after window aggregation; exact observed values are not supplied.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"Protocol Type","definition":"Modal IP protocol-number value across the packet aggregation window.","unit":"IP protocol number","admissible_range":"Integer from 0 through 255 before preprocessing; exact observed values are not supplied.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"Time_To_Live","definition":"Mean IP time-to-live field across the packet aggregation window; this corresponds to the paper's Duration/TTL feature.","unit":"hop-count field value","admissible_range":"Real value from 0 through 255 after window aggregation.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"Rate","definition":"Packet count divided by the elapsed time of the aggregation window.","unit":"packets per second","admissible_range":"Nonnegative real value when the window duration is positive; exact observed values are not supplied.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"fin_flag_number","definition":"Window-aggregated indicator for the TCP FIN control flag.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"syn_flag_number","definition":"Window-aggregated indicator for the TCP SYN control flag.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"rst_flag_number","definition":"Window-aggregated indicator for the TCP RST control flag.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"psh_flag_number","definition":"Window-aggregated indicator for the TCP PSH control flag.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"ack_flag_number","definition":"Window-aggregated indicator for the TCP ACK control flag.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"ece_flag_number","definition":"Window-aggregated indicator for the TCP ECE control flag.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"cwr_flag_number","definition":"Window-aggregated indicator for the TCP CWR control flag.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"ack_count","definition":"Aggregated count-like value for packets carrying the TCP ACK flag in the window.","unit":"packet count","admissible_range":"Nonnegative numeric value after aggregation; exact observed values are not supplied.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"syn_count","definition":"Aggregated count-like value for packets carrying the TCP SYN flag in the window.","unit":"packet count","admissible_range":"Nonnegative numeric value after aggregation; exact observed values are not supplied.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"fin_count","definition":"Aggregated count-like value for packets carrying the TCP FIN flag in the window.","unit":"packet count","admissible_range":"Nonnegative numeric value after aggregation; exact observed values are not supplied.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"rst_count","definition":"Aggregated count-like value for packets carrying the TCP RST flag in the window.","unit":"packet count","admissible_range":"Nonnegative numeric value after aggregation; exact observed values are not supplied.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"HTTP","definition":"Window-aggregated indicator for traffic using the extractor's HTTP port rule.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"HTTPS","definition":"Window-aggregated indicator for traffic using the extractor's HTTPS port rule.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"DNS","definition":"Window-aggregated indicator for traffic using the extractor's DNS port rule.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"Telnet","definition":"Window-aggregated indicator for traffic using the extractor's Telnet port rule.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"SMTP","definition":"Window-aggregated indicator for traffic using the extractor's SMTP port rule.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"SSH","definition":"Window-aggregated indicator for traffic using the extractor's SSH port rule.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"IRC","definition":"Window-aggregated indicator labelled IRC by the dataset; the supplied supplementary extractor implements this label with a port-21 rule, so it must not be interpreted as a protocol-perfect IRC detector.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"TCP","definition":"Window-aggregated indicator that the IP payload is TCP.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"UDP","definition":"Window-aggregated indicator that the IP payload is UDP.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"DHCP","definition":"Window-aggregated indicator for traffic matching the extractor's DHCP port-pair rule.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"ARP","definition":"Window-aggregated indicator for Address Resolution Protocol traffic.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"ICMP","definition":"Window-aggregated indicator for Internet Control Message Protocol traffic.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"IGMP","definition":"Window-aggregated indicator for Internet Group Management Protocol traffic.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"IPv","definition":"Window-aggregated indicator for IP traffic in the extractor's layered feature set.","unit":"proportion","admissible_range":"Real value from 0 through 1.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"LLC","definition":"Field labelled as a window-aggregated Logical Link Control indicator; the supplied supplementary extractor uses a type-check expression that appears constant-like, so semantic interpretation requires caution.","unit":"proportion","admissible_range":"Real value from 0 through 1 after aggregation.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"Tot sum","definition":"Sum of Ethernet frame sizes within the packet aggregation window.","unit":"bytes","admissible_range":"Nonnegative real value; exact observed values are not supplied.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"Min","definition":"Minimum Ethernet frame size within the packet aggregation window.","unit":"bytes","admissible_range":"Nonnegative real value; exact observed values are not supplied.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"Max","definition":"Maximum Ethernet frame size within the packet aggregation window.","unit":"bytes","admissible_range":"Nonnegative real value; exact observed values are not supplied.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"AVG","definition":"Arithmetic mean Ethernet frame size within the packet aggregation window.","unit":"bytes","admissible_range":"Nonnegative real value; exact observed values are not supplied.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"Std","definition":"Sample standard deviation of Ethernet frame sizes within the packet aggregation window.","unit":"bytes","admissible_range":"Nonnegative real value; exact observed values are not supplied.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"Tot size","definition":"Mean Ethernet frame size retained by the window aggregation step.","unit":"bytes","admissible_range":"Nonnegative real value; exact observed values are not supplied.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"IAT","definition":"Mean elapsed time between consecutive accepted packets in the aggregation window.","unit":"seconds","admissible_range":"Nonnegative real value; exact observed values are not supplied.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"Number","definition":"Number of packets represented by the aggregation window.","unit":"packet count","admissible_range":"Positive integer for a nonempty window; exact observed values are not supplied.","source_ids":["cic_paper","cic_extractor"]},
+    {"name":"Variance","definition":"Sample variance of Ethernet frame sizes within the packet aggregation window.","unit":"bytes squared","admissible_range":"Nonnegative real value; exact observed values are not supplied.","source_ids":["cic_paper","cic_extractor"]}
+  ],
+  "classes": [
+    {"name":"benign","description":"Normal IoT traffic without one of the dataset's 33 attack labels.","source_ids":["cic_paper","cic_dataset_page"]},
+    {"name":"brute_force","description":"Dictionary-based brute-force attack traffic in the dataset's Brute Force category.","source_ids":["cic_paper","cic_dataset_page"]},
+    {"name":"ddos","description":"Distributed denial-of-service traffic covering the dataset's ACK fragmentation, UDP flood, SlowLoris, ICMP flood, RSTFIN flood, PSHACK flood, HTTP flood, UDP fragmentation, TCP flood, SYN flood, SynonymousIP flood, and ICMP fragmentation scenarios.","source_ids":["cic_paper","cic_dataset_page"]},
+    {"name":"dos","description":"Single-source denial-of-service traffic covering TCP, HTTP, SYN, and UDP flood scenarios.","source_ids":["cic_paper","cic_dataset_page"]},
+    {"name":"mirai","description":"Traffic from the dataset's Mirai GREIP flood, GRE Ethernet flood, and UDPPlain scenarios.","source_ids":["cic_paper","cic_dataset_page"]},
+    {"name":"recon","description":"Reconnaissance traffic covering ping sweep, operating-system scan, vulnerability scan, port scan, and host discovery scenarios.","source_ids":["cic_paper","cic_dataset_page"]},
+    {"name":"spoofing","description":"Spoofing traffic covering ARP-spoofing and DNS-spoofing scenarios.","source_ids":["cic_paper","cic_dataset_page"]},
+    {"name":"web_based","description":"Web-oriented attack traffic covering SQL injection, command injection, backdoor malware, uploading attack, cross-site scripting, and browser hijacking scenarios.","source_ids":["cic_paper","cic_dataset_page"]}
+  ]
+}

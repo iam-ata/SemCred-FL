@@ -1,0 +1,26 @@
+{
+  "title": "SemCred-FL: LLM-Guided Dual-View Credibility Aggregation for Robust Federated Intrusion Detection under Data Poisoning",
+  "description": "Research implementation of SemCred-FL, a federated intrusion-detection aggregation method that combines offline semantic evidence with numerical update evidence, persistent trust, eligibility filtering, and clipping.",
+  "creators": [
+    {
+      "name": "Derakhshanfard, Nahideh",
+      "affiliation": "Department of Computer Engineering, Ta.C., Islamic Azad University, Tabriz, Iran"
+    },
+    {
+      "name": "Mohammadi, Ata",
+      "affiliation": "Department of Computer Engineering, Ta.C., Islamic Azad University, Tabriz, Iran"
+    }
+  ],
+  "version": "0.1.0",
+  "upload_type": "software",
+  "access_right": "open",
+  "language": "eng",
+  "keywords": [
+    "federated learning",
+    "intrusion detection",
+    "data poisoning",
+    "robust aggregation",
+    "semantic credibility",
+    "client trust"
+  ]
+}

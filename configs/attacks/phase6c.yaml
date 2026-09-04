@@ -1,0 +1,38 @@
+schema_version: 1
+phase: 6C
+base_seed: 20260816
+
+total_clients: 50
+clients_per_round: 20
+total_rounds: 100
+
+local_epochs: 3
+batch_size: 128
+learning_rate: 0.001
+proximal_mu: 0.0
+maximum_class_weight: 10.0
+
+hidden_dimensions: [256, 128, 64]
+dropout: 0.2
+
+profiles: [iid, dirichlet_0_1, dirichlet_0_3, dirichlet_1_0]
+malicious_client_ratios: [0.1, 0.2, 0.3, 0.4]
+poison_fractions: [0.1, 0.3, 0.5]
+clean_label_strengths: [0.5, 1.0]
+scaling_factors: [5.0, 10.0]
+reversal_factors: [1.0, 5.0, 10.0]
+attack_names:
+  - adaptive_norm
+  - backdoor
+  - clean
+  - clean_label
+  - label_flip
+  - model_replacement
+  - scaling
+  - sign_reversal
+schedule_mode: stratified_fixed_coalition_malicious_minority
+
+test_partition_accessed: false
+validation_partition_accessed: false
+anchor_records_accessed: false
+performance_claims_allowed: false

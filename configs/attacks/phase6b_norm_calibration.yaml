@@ -1,0 +1,25 @@
+schema_version: 1
+phase: 6B.2
+base_seed: 20260816
+
+profiles: [iid, dirichlet_0_1, dirichlet_0_3, dirichlet_1_0]
+total_rounds: 3
+clients_per_round: 20
+aggregation: fedavg
+
+local_epochs: 3
+batch_size: 128
+learning_rate: 0.001
+proximal_mu: 0.0
+maximum_class_weight: 10.0
+
+hidden_dimensions: [256, 128, 64]
+dropout: 0.2
+
+lower_quantile: 0.25
+upper_quantile: 0.75
+reference_population: benign_only_development_runs_same_dataset_model_and_partition
+
+test_partition_accessed: false
+anchor_records_accessed: false
+performance_claims_allowed: false

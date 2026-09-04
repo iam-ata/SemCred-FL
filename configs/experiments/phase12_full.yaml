@@ -1,0 +1,82 @@
+schema_version: 1
+phase: 12
+status: implementation_ready_execution_pending
+
+datasets: [edge_iiotset, cic_iot_2023]
+profiles: [iid, dirichlet_1_0, dirichlet_0_3, dirichlet_0_1]
+seeds: [20260816, 20260817, 20260818, 20260819, 20260820, 20260821, 20260822, 20260823, 20260824, 20260825]
+methods: [fedavg, coordinate_median, trimmed_mean, multi_krum, semcred_fl]
+
+federation:
+  total_clients: 50
+  clients_per_round: 20
+  total_rounds: 100
+  local_epochs: 3
+  batch_size: 128
+  learning_rate: 0.001
+  proximal_mu: 0.0
+  maximum_class_weight: 10.0
+
+model:
+  hidden_dimensions: [256, 128, 64]
+  dropout: 0.2
+
+semcred_fl:
+  burn_in_rounds: 3
+  attribution_interval: 1
+  semantic_fusion_coefficient: 0.5
+  disagreement_penalty: 1.0
+  trust_decrease_rate: 0.6
+  trust_recovery_rate: 0.1
+  sample_count_exponent: 0.0
+  sample_cap_median_multiplier: 2.0
+  trust_exponent: 2.0
+  threshold_multiplier: 2.5
+  minimum_trust: 0.1
+  minimum_retained_ratio: 0.5
+  clipping_multiplier: 2.5
+  history_decay: 0.8
+  semantic_coefficients:
+    loss: 0.5
+    attribution: 0.5
+  numerical_coefficients:
+    center: 0.25
+    norm: 0.25
+    direction: 0.25
+    history: 0.25
+  robust_scoring:
+    z_max: 20.0
+    minimum_history_clients: 3
+    epsilon: 1.0e-12
+    negligible_norm: 1.0e-12
+
+execution:
+  device: auto
+  prefer_fused_adam: true
+  materialize_client_batches: true
+  cache_scan_batch_size: 100000
+  validation_batch_size: 8192
+
+baselines:
+  trimmed_mean:
+    trim_count: 4
+  multi_krum:
+    assumed_byzantine: 4
+    selected_count: 16
+
+reporting:
+  primary_metric: macro_f1
+  bootstrap_resamples: 10000
+  bootstrap_seed: 20260904
+  paired_test: wilcoxon_exact_two_sided
+  multiplicity_correction: holm
+
+paths:
+  output_directory: artifacts/experiments/phase_12/measured_final_clean
+  cache_root: artifacts/client_cache/phase_12/measured_final_clean
+
+gates:
+  validation_partition_access: completion_only
+  test_partition_accessed: false
+  performance_claims_allowed: false
+  manuscript_modified_by_pipeline: false

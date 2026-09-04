@@ -1,0 +1,55 @@
+"""Phase 11 evaluation and reporting APIs."""
+
+from semcred_fl.evaluation.efficiency import CommunicationRecord, OfflineLLMCost, OnlineTiming
+from semcred_fl.evaluation.metrics import (
+    DelayMetric,
+    EligibilityMetrics,
+    RankingMetrics,
+    RateMetric,
+    RobustnessMetrics,
+    TrustSeparation,
+    eligibility_metrics,
+    malicious_client_ranking,
+    rate,
+    robustness_metrics,
+    threshold_crossing_delay,
+    trust_separation,
+    trust_volatility,
+)
+from semcred_fl.evaluation.statistics import (
+    CorrectedComparison,
+    DescriptiveStatistics,
+    PairedComparisonInput,
+    WilcoxonResult,
+    analyze_comparison_family,
+    describe,
+    holm_adjust,
+    paired_wilcoxon_exact,
+)
+
+__all__ = [
+    "CommunicationRecord",
+    "CorrectedComparison",
+    "DelayMetric",
+    "DescriptiveStatistics",
+    "EligibilityMetrics",
+    "OfflineLLMCost",
+    "OnlineTiming",
+    "PairedComparisonInput",
+    "RankingMetrics",
+    "RateMetric",
+    "RobustnessMetrics",
+    "TrustSeparation",
+    "WilcoxonResult",
+    "analyze_comparison_family",
+    "describe",
+    "eligibility_metrics",
+    "holm_adjust",
+    "malicious_client_ranking",
+    "paired_wilcoxon_exact",
+    "rate",
+    "robustness_metrics",
+    "threshold_crossing_delay",
+    "trust_separation",
+    "trust_volatility",
+]
