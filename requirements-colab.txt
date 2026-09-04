@@ -2,7 +2,7 @@
 # replace it with the Windows-specific cu130 wheel pinned in environment.yml.
 numpy>=1.26,<3
 pandas>=2.2,<4
-pyarrow>=17,<24
+pyarrow>=17,<26
 scikit-learn>=1.5,<2
 PyYAML>=6,<7
 matplotlib>=3.9,<4
